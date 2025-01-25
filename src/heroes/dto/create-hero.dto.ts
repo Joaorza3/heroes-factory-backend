@@ -1,8 +1,8 @@
 export class CreateHeroDto {
   name: string;
   nickname: string;
-  dateOfBirth: Date;
+  date_of_birth: Date;
   universe: string;
-  mainPower: string;
-  avatarUrl: string;
+  main_power: string;
+  avatar_url: string;
 }

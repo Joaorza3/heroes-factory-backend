@@ -13,10 +13,10 @@ export class HeroesService {
       data: {
         name: createHeroDto.name,
         nickname: createHeroDto.nickname,
-        date_of_birth: createHeroDto.dateOfBirth,
+        date_of_birth: createHeroDto.date_of_birth,
         universe: createHeroDto.universe,
-        main_power: createHeroDto.mainPower,
-        avatar_url: createHeroDto.avatarUrl,
+        main_power: createHeroDto.main_power,
+        avatar_url: createHeroDto.avatar_url,
         is_active: true,
       },
     });
@@ -120,10 +120,10 @@ export class HeroesService {
       data: {
         name: updateHeroDto.name,
         nickname: updateHeroDto.nickname,
-        date_of_birth: updateHeroDto.dateOfBirth,
+        date_of_birth: updateHeroDto.date_of_birth,
         universe: updateHeroDto.universe,
-        main_power: updateHeroDto.mainPower,
-        avatar_url: updateHeroDto.avatarUrl,
+        main_power: updateHeroDto.main_power,
+        avatar_url: updateHeroDto.avatar_url,
       },
     });
   }
