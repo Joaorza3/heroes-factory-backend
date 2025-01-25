@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { HeroesService } from './heroes.service';
 import { CreateHeroDto } from './dto/create-hero.dto';
 import { UpdateHeroDto } from './dto/update-hero.dto';
+import { IHeroesFilters } from 'src/interfaces/heroes-filters.interface';
 
 @Controller('heroes')
 export class HeroesController {
@@ -13,22 +14,27 @@ export class HeroesController {
   }
 
   @Get()
-  findAll() {
-    return this.heroesService.findAll();
+  findAll(@Query() filters: IHeroesFilters) {
+    return this.heroesService.findAll(filters);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.heroesService.findOne(+id);
+    return this.heroesService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateHeroDto: UpdateHeroDto) {
-    return this.heroesService.update(+id, updateHeroDto);
+    return this.heroesService.update(id, updateHeroDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.heroesService.remove(+id);
+  @Patch(':id/activate')
+  activate(@Param('id') id: string) {
+    return this.heroesService.activate(id);
+  }
+
+  @Patch(':id/deactivate')
+  deactivate(@Param('id') id: string) {
+    return this.heroesService.deactivate(id);
   }
 }
