@@ -71,7 +71,8 @@ export class HeroesService {
       cursor: cursor && {
         id: cursor,
       },
-      skip: skip,
+      skip: Number(skip),
+      take: 10,
     };
 
     return query;
@@ -90,7 +91,12 @@ export class HeroesService {
       where: query.where,
     });
 
-    const heroes = await this.prismaService.hero.findMany(query);
+    const heroes = await this.prismaService.hero.findMany({
+      ...query,
+      orderBy: {
+        created_at: 'desc',
+      },
+    });
 
     return {
       count,

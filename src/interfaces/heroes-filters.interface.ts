@@ -3,5 +3,5 @@ export interface IHeroesFilters {
     universe?: string;
     isActive?: boolean;
     skip: number;
-    cursor: string
+    cursor?: string
 }
