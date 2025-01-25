@@ -22,7 +22,13 @@ export class HeroesService {
     });
   }
 
-  async findAll({ name, universe, isActive, cursor, skip }: IHeroesFilters) {
+  prepareQueryFilters({
+    name,
+    universe,
+    isActive,
+    cursor,
+    skip,
+  }: IHeroesFilters) {
     const whereName = name && {
       OR: [
         {
@@ -68,12 +74,20 @@ export class HeroesService {
       skip: skip,
     };
 
+    return query;
+  }
+
+  async findAll({ name, universe, isActive, cursor, skip }: IHeroesFilters) {
+    const query = this.prepareQueryFilters({
+      name,
+      universe,
+      isActive,
+      cursor,
+      skip,
+    });
+
     const count = await this.prismaService.hero.count({
-      where: {
-        ...whereName,
-        ...whereUniverse,
-        ...whereIsActive,
-      },
+      where: query.where,
     });
 
     const heroes = await this.prismaService.hero.findMany(query);
