@@ -7,8 +7,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: heroes_factory
-      MYSQL_USER: user
-      MYSQL_PASSWORD: pass
     ports:
       - "3306:3306"
     volumes:
