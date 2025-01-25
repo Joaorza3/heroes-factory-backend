@@ -22,7 +22,7 @@ export class HeroesService {
     });
   }
 
-  findAll({ name, universe, isActive, cursor, skip }: IHeroesFilters) {
+  async findAll({ name, universe, isActive, cursor, skip }: IHeroesFilters) {
     const whereName = name && {
       OR: [
         {
@@ -37,22 +37,26 @@ export class HeroesService {
             mode: 'insensitive',
           },
         },
-      ]
+      ],
     };
 
-    const whereUniverse = universe ? {
-      universe: {
-        equals: universe,
-      }
-    } : {};
+    const whereUniverse = universe
+      ? {
+          universe: {
+            equals: universe,
+          },
+        }
+      : {};
 
-    const whereIsActive = isActive ? {
-      is_active: {
-        equals: isActive,
-      }
-    } : {};
+    const whereIsActive = isActive
+      ? {
+          is_active: {
+            equals: isActive,
+          },
+        }
+      : {};
 
-    return this.prismaService.hero.findMany({
+    const query = {
       where: {
         ...whereName,
         ...whereUniverse,
@@ -62,7 +66,22 @@ export class HeroesService {
         id: cursor,
       },
       skip: skip,
+    };
+
+    const count = await this.prismaService.hero.count({
+      where: {
+        ...whereName,
+        ...whereUniverse,
+        ...whereIsActive,
+      },
     });
+
+    const heroes = await this.prismaService.hero.findMany(query);
+
+    return {
+      count,
+      heroes,
+    };
   }
 
   findOne(id: string) {
