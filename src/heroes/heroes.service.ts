@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { CreateHeroDto } from './dto/create-hero.dto';
 import { UpdateHeroDto } from './dto/update-hero.dto';
-import { PrismaService } from 'src/prisma.service';
-import { IHeroesFilters } from 'src/interfaces/heroes-filters.interface';
+import { PrismaService } from '../prisma.service';
+import { IHeroesFilters } from '../interfaces/heroes-filters.interface';
 
 @Injectable()
 export class HeroesService {
