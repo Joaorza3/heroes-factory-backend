@@ -11,6 +11,15 @@ services:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
+  
+  mysql-test:
+    image: mysql:8
+    container_name: mysql-test
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: heroes_factory_test
+    ports:
+      - "3307:3306"
 
 volumes:
   mysql-data:
