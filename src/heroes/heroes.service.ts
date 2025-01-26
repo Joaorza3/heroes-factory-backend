@@ -13,7 +13,7 @@ export class HeroesService {
       data: {
         name: createHeroDto.name,
         nickname: createHeroDto.nickname,
-        date_of_birth: createHeroDto.date_of_birth,
+        date_of_birth: new Date(createHeroDto.date_of_birth).toISOString(),
         universe: createHeroDto.universe,
         main_power: createHeroDto.main_power,
         avatar_url: createHeroDto.avatar_url,
