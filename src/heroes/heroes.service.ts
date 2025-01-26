@@ -34,13 +34,11 @@ export class HeroesService {
         {
           name: {
             contains: name,
-            mode: 'insensitive',
           },
         },
         {
           nickname: {
             contains: name,
-            mode: 'insensitive',
           },
         },
       ],
@@ -57,7 +55,7 @@ export class HeroesService {
     const whereIsActive = isActive
       ? {
           is_active: {
-            equals: isActive,
+            equals: isActive.toLowerCase() === 'true',
           },
         }
       : {};

@@ -1,7 +1,7 @@
 export interface IHeroesFilters {
     name?: string;
     universe?: string;
-    isActive?: boolean;
+    isActive?: string;
     skip: number;
     cursor?: string
 }
