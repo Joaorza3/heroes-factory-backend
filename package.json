@@ -14,10 +14,10 @@
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "dotenv -e .env.test jest",
-    "test:integration": "npx dotenv -e .env.test -- prisma migrate dev && jest --config ./test/jest-e2e.json",
+    "db:integration:prepare": "npx dotenv -e .env.test -- prisma migrate dev",
+    "test:integration": "npx dotenv -e .env.test -- jest --config ./test/jest-e2e.json",
     "db:seed": "prisma db seed",
     "db:migrate": "prisma db push"
-    
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
