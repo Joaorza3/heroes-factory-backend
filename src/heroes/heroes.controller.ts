@@ -37,4 +37,9 @@ export class HeroesController {
   deactivate(@Param('id') id: string) {
     return this.heroesService.deactivate(id);
   }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.heroesService.remove(id);
+  }
 }

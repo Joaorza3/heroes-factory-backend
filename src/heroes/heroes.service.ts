@@ -147,4 +147,12 @@ export class HeroesService {
       },
     });
   }
+
+  remove(id: string) {
+    return this.prismaService.hero.delete({
+      where: {
+        id: id,
+      },
+    });
+  }
 }

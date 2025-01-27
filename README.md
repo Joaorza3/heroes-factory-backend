@@ -152,6 +152,9 @@ A rota base para o módulo de heróis é `/heroes`. Exemplos de uso:
    - **PATCH** `/heroes/:id/activate`  
    - **PATCH** `/heroes/:id/deactivate`
 
+6. **Deletar Herói**
+    - **DELETE** `/heroes/:id`
+
 A maioria das respostas segue um padrão de saída:
 ```json
 {
