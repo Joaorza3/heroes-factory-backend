@@ -42,6 +42,10 @@ describe('HeroesService', () => {
         id: '1',
         ...mockHero,
       })),
+      delete: jest.fn().mockImplementation(() => ({
+        id: '1',
+        ...mockHero,
+      })),
     },
   };
 
@@ -300,6 +304,16 @@ describe('HeroesService', () => {
       },
       data: {
         is_active: false,
+      },
+    });
+  });
+
+  it('should remove a hero', async () => {
+    await service.remove('1');
+
+    expect(prismaService.hero.delete).toHaveBeenCalledWith({
+      where: {
+        id: '1',
       },
     });
   });
