@@ -3,6 +3,7 @@ import { CreateHeroDto } from './dto/create-hero.dto';
 import { UpdateHeroDto } from './dto/update-hero.dto';
 import { PrismaService } from '../prisma.service';
 import { IHeroesFilters } from '../interfaces/heroes-filters.interface';
+import * as moment from 'moment';
 
 @Injectable()
 export class HeroesService {
@@ -20,6 +21,23 @@ export class HeroesService {
         is_active: true,
       },
     });
+  }
+
+  async generateCsvReport() { 
+    const heroes = await this.prismaService.hero.findMany();
+
+    const csvHeader = 'name,nickname,date_of_birth,universe,main_power,avatar_url,is_active\n';
+
+    const csvContent = heroes
+      .map((hero) => {
+        console.log(moment())
+        const dateOfBirth = moment(hero.date_of_birth).format('YYYY-MM-DD');
+
+        return `${hero.name},${hero.nickname},${dateOfBirth},${hero.universe},${hero.main_power},${hero.avatar_url},${hero.is_active}`;
+      })
+      .join('\n');
+
+    return csvHeader + csvContent;
   }
 
   prepareQueryFilters({
