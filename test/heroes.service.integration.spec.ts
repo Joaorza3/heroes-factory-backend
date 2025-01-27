@@ -38,6 +38,14 @@ describe('HeroesService Integration', () => {
     expect(hero.name).toBe(createHeroDto.name);
   });
 
+  it('should generate a csv report', async () => {
+    await prismaService.hero.deleteMany();
+
+    const csvData = await service.generateCsvReport();
+
+    expect(csvData).toContain('id,name,nickname,date_of_birth,universe,main_power,avatar_url,is_active');    
+  });
+
   it('should update a hero', async () => {
     const createHeroDto: CreateHeroDto = {
       name: 'Clark Kent',

@@ -24,7 +24,7 @@ describe('HeroesService', () => {
       })),
       count: jest.fn().mockImplementation(() => 1),
       findMany: jest.fn().mockImplementation((query) => {
-        if (query.where.name === 'Steve Rogers') {
+        if (query?.where?.name === 'Steve Rogers') {
           return [
             {
               id: '1',
@@ -79,6 +79,22 @@ describe('HeroesService', () => {
         is_active: true,
       },
     });
+  });
+
+  it('should generate a csv report', async () => {
+    prismaService.hero.findMany = jest.fn().mockImplementation(() => [
+      {
+        id: '1',
+        ...mockHero,
+        is_active: true,
+      },
+    ]);
+
+    const csvData = await service.generateCsvReport();
+
+    expect(csvData).toBe(
+      `id,name,nickname,date_of_birth,universe,main_power,avatar_url,is_active\n1,Steve Rogers,Capitão America,2025-01-05,Marvel,Soro de Super soldado,https://i.pinimg.com/736x/7a/d7/15/7ad715227a0707890f92bcb50f1e2d94.jpg,true`
+    );
   });
 
   it('should prepare query filters with name', () => {

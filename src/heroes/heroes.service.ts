@@ -26,14 +26,13 @@ export class HeroesService {
   async generateCsvReport() { 
     const heroes = await this.prismaService.hero.findMany();
 
-    const csvHeader = 'name,nickname,date_of_birth,universe,main_power,avatar_url,is_active\n';
+    const csvHeader = 'id,name,nickname,date_of_birth,universe,main_power,avatar_url,is_active\n';
 
     const csvContent = heroes
       .map((hero) => {
-        console.log(moment())
         const dateOfBirth = moment(hero.date_of_birth).format('YYYY-MM-DD');
 
-        return `${hero.name},${hero.nickname},${dateOfBirth},${hero.universe},${hero.main_power},${hero.avatar_url},${hero.is_active}`;
+        return `${hero.id},${hero.name},${hero.nickname},${dateOfBirth},${hero.universe},${hero.main_power},${hero.avatar_url},${hero.is_active}`;
       })
       .join('\n');
 
