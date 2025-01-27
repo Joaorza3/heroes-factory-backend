@@ -122,4 +122,21 @@ describe('HeroesService Integration', () => {
     expect(heroes).toHaveProperty('count');
     expect(heroes).toHaveProperty('heroes');
   });
+
+  it('should remove a hero', async () => {
+    const createHeroDto: CreateHeroDto = {
+      name: 'Hal Jordan',
+      nickname: 'Green Lantern',
+      date_of_birth: new Date('1959-10-01'),
+      universe: 'DC',
+      main_power: 'Power Ring',
+      avatar_url: 'https://example.com/greenlantern.jpg',
+    };
+
+    const createdHero = await service.create(createHeroDto);
+
+    const removedHero = await service.remove(createdHero.id);
+
+    expect(removedHero).toHaveProperty('id');
+  });
 });
